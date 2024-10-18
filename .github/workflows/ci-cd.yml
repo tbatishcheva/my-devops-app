@@ -13,35 +13,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Клонирование репозитория
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Установка Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
 
-      # Установка зависимостей
       - name: Install dependencies
         run: npm install
 
-      # Запуск тестов (в нашем примере тестов нет, но можно добавить)
       - name: Run tests
         run: echo "Tests passed"
 
-      # Логин в Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Сборка Docker-образа
       - name: Build Docker image
         run: docker build -t yourusername/my-devops-app:latest .
 
-      # Публикация Docker-образа в Docker Hub
       - name: Push Docker image
         run: docker push yourusername/my-devops-app:latest
